@@ -2,7 +2,7 @@ import { Outlet } from "react-router";
 import Nav from "./components/Nav";
 import { Container } from "@mui/material";
 import Footer from "./components/Footer";
-import IntroOverlay from "./IntroOverlay";
+import IntroOverlay from "./components/IntroOverlay";
 
 const App = () => {
   return (

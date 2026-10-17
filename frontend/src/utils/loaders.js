@@ -20,3 +20,11 @@ export const eventLoader = ({ params }) => {
 export const eventsLoader = () => {
   return fetchJson("/api/events/");
 };
+
+export const homeLoader = async () => {
+  const events = await fetchJson("/api/events");
+  const nextEvent = events.find(
+    (event) => new Date(event.doorsOpenAt) > new Date(),
+  );
+  return nextEvent ?? null;
+};

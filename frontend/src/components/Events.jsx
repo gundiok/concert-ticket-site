@@ -12,8 +12,15 @@ import { formatDate, formatPrice } from "../utils/formatter";
 const Events = () => {
   const events = useLoaderData();
   return (
-    <Container>
-      <Typography variant="h3" component="h1" gutterBottom>
+    <Container sx={{ mt: { xs: 3, md: 6 }, mb: 4 }}>
+      <Typography
+        variant="h3"
+        component="h1"
+        sx={{
+          fontSize: { xs: "2.5rem", md: "3rem" },
+          mb: 3,
+        }}
+      >
         Tour Dates
       </Typography>
       <Stack spacing={2}>
@@ -21,7 +28,7 @@ const Events = () => {
           <Card key={event.id}>
             <CardActionArea component={Link} to={`/events/${event.id}`}>
               <CardContent>
-                <Typography variant="h5" component="h2">
+                <Typography variant="h5" component="h2"  sx={{ fontSize: { xs: "1.1rem", md: "1.5rem" } }}>
                   {event.city}, {event.venue}
                 </Typography>
                 <Typography color="text.secondary">

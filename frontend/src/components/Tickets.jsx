@@ -3,8 +3,8 @@ import { Form } from "react-router";
 
 const Tickets = () => {
   return (
-    <Container>
-      <Typography variant="h2" component="h1">
+    <Container sx={{ mt: { xs: 3, md: 6 }, mb: 4 }}>
+      <Typography variant="h3" component="h1" >
         My Tickets
       </Typography>
       <Form>

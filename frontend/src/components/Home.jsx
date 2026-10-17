@@ -1,8 +1,12 @@
 import { Typography, Box, Button, Container, Stack } from "@mui/material";
 import band from "../data/band";
-import { Link } from "react-router";
+import { Link, useLoaderData } from "react-router";
+import { formatPrice, formatTime, getDateParts } from "../utils/formatter";
 
 const Home = () => {
+  const event = useLoaderData();
+  const { day, month, year } = getDateParts(event.doorsOpenAt);
+
   return (
     <Container>
       <Box
@@ -11,29 +15,23 @@ const Home = () => {
           minHeight: { xs: 420, md: 560 },
           borderRadius: 4,
           display: "flex",
+          justifyContent: "center",
           alignItems: "flex-end",
-          backgroundImage: `linear-gradient(to bottom, rgba(11, 11, 20, 0.1), rgba(11, 11, 20, 0.95)), url(${band.heroImage})`,
-          backgroundSize: "cover",
-          backgroundPosition: "center",
         }}
       >
-        <Box sx={{ p: { xs: 3, md: 6 }, maxWidth: 640 }}>
-          <Typography
-            variant="h2"
-            component="h1"
-            color="primary"
-            gutterBottom
-            sx={{ textShadow: "0 0 24px rgba(255, 42, 109, 0.6)" }}
-          >
+        <Box sx={{ p: { xs: 3, md: 6 }, textAlign: "center", width: "100%" }}>
+          <Typography variant="h2" component="h1" gutterBottom>
             <Box
               component="img"
               src={band.logo}
-               sx={{"width":"100%", maxWidth: "50%"}}
+              sx={{ width: { xs: "90%", md: "100%" }, maxWidth: 1000 }}
               alt={band.name}
             ></Box>
           </Typography>
 
-          <Typography sx={{ mb: 3 }}>{band.bio}</Typography>
+          <Typography sx={{ mb: 3, maxWidth: "60ch", mx: "auto" }}>
+            {band.bio}
+          </Typography>
 
           <Button
             component={Link}
@@ -45,6 +43,7 @@ const Home = () => {
           </Button>
         </Box>
       </Box>
+
       <Stack
         direction={{ xs: "column", md: "row" }}
         spacing={10}
@@ -60,10 +59,9 @@ const Home = () => {
             height: "auto",
             borderRadius: 3,
             display: "block",
-            flex: 1,
           }}
         ></Box>
-        <Box sx={{ flex: 1 }}>
+        <Box>
           <Typography variant="h4" component="h2" gutterBottom>
             About the band
           </Typography>
@@ -73,13 +71,84 @@ const Home = () => {
               maxWidth: "60ch",
               fontFamily: "Roboto, sans-serif",
               fontSize: "1.2rem",
-              lineHeight: "1.8rem",
+              lineHeight: "1.5",
             }}
             gutterBottom
           >
             {band.bioText}
           </Typography>
         </Box>
+      </Stack>
+      <Stack
+        sx={{
+          m: 10,
+          mx: "auto",
+
+          bgcolor: "rgba(21, 20, 20, 0.6)",
+          backdropFilter: "blur(8px)",
+          border: 0.5,
+          borderColor: "rgba(102, 51, 55, 0.3)",
+          maxWidth: 700,
+          borderRadius: 3,
+          p: { xs: 3, md: 4 },
+        }}
+      >
+        <Typography
+          variant="h4"
+          component="h2"
+          sx={{ color: "primary.main", mb: 3 , textAlign:"center"}}
+        >
+          UPCOMING EVENT
+        </Typography>
+        {event ? (
+          <Box
+            sx={{
+              display: "flex",
+              justifyContent: "center",
+              gap: 20,
+              alignItems: "center",
+            }}
+          >
+            <Stack>
+              <Typography
+                variant="h3"
+                component="h2"
+                sx={{ color: "primary.main" }}
+              >
+                {day}{" "}
+              </Typography>
+              <Typography variant="h3" component="h2">
+                {month}
+              </Typography>
+              <Typography variant="h3" component="h2">
+                {year}
+              </Typography>
+            </Stack>
+
+            <Stack spacing={2}>
+              <Typography variant="h5" component="h3">
+                {event.city} , {event.venue}
+              </Typography>
+              <Typography sx={{ fontSize: "1.2rem" }}>
+                Doors {formatTime(event.doorsOpenAt)}
+              </Typography>
+              <Typography sx={{ fontSize: "1.2rem", fontWeight: 900 }}>
+                {formatPrice(event.priceCents)}
+              </Typography>
+
+              <Button
+                component={Link}
+                to={`/events/${event.id}`}
+                variant="contained"
+                sx={{ mt: 2 }}
+              >
+                Buy Tickets
+              </Button>
+            </Stack>
+          </Box>
+        ) : (
+          <Typography>New dates coming soon!</Typography>
+        )}
       </Stack>
     </Container>
   );

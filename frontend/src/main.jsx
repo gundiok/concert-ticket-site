@@ -16,7 +16,7 @@ import "@fontsource/roboto/700.css";
 import "@fontsource/roboto/900.css";
 import Tickets from "./components/Tickets.jsx";
 import Events from "./components/Events.jsx";
-import { eventLoader, eventsLoader } from "./utils/loaders.js";
+import { eventLoader, eventsLoader, homeLoader } from "./utils/loaders.js";
 import Media from "./components/Media.jsx";
 import Band from "./components/Band.jsx";
 
@@ -25,7 +25,7 @@ const router = createBrowserRouter([
     path: "/",
     element: <App />,
     children: [
-      { index: true, element: <Home /> },
+      { index: true, element: <Home /> , loader: homeLoader},
       { path: "events", element: <Events />, loader: eventsLoader },
       { path: "events/:id", element: <EventDetail />, loader: eventLoader },
       { path: "tickets", element: <Tickets /> },

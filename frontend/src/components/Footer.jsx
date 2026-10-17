@@ -35,8 +35,17 @@ const Footer = () => {
               target="_blank"
               rel="noopener noreferrer"
               aria-label={`${band.name} on ${platform.label}`}
+              size="large"
+              sx={{
+                color: "primary.main",
+                "&:hover": {
+                  color: "text.primary",
+                  filter: "drop-shadow(0 0 6px rgba(215,38,43,0.8))",
+                },
+                transition: "all 0.2s",
+              }}
             >
-              <Icon />
+              <Icon fontSize="large" />
             </IconButton>
           );
         })}

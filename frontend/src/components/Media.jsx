@@ -7,16 +7,16 @@ const Media = () => {
       <Typography variant="h2" component="h1" gutterBottom>
         Gallery
       </Typography>
-      <Typography variant="h3" component="h2" gutterBottom>
+      <Typography variant="h4" component="h2" gutterBottom>
         Videos
       </Typography>
       <Grid container spacing={2} sx={{ mb: 10 }}>
         {videos.map((video) => (
-          <Grid size={{ xs: 12, md: 6 }} key={video.id}>
+          <Grid size={{ xs: 12, md: 6 }} key={video.id} >
             <Box
               component="iframe"
               src={`https://www.youtube-nocookie.com/embed/${video.id}`}
-              alt={video.title}
+              title={video.title}
               loading="lazy"
               allowFullScreen
               sx={{
@@ -29,7 +29,7 @@ const Media = () => {
           </Grid>
         ))}
       </Grid>
-      <Typography variant="h3" component="h2" gutterBottom>
+      <Typography variant="h4" component="h2" gutterBottom>
         Photos
       </Typography>
 
@@ -39,7 +39,7 @@ const Media = () => {
             <Box
               component="img"
               src={image.src}
-              title={image.alt}
+              alt={image.alt}
               loading="lazy"
               sx={{
                 width: "100%",
