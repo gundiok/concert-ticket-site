@@ -33,18 +33,18 @@ export const socials = [
     url: "https://www.youtube.com/@katalyst2156/",
   },
 ];
-
 export const videos = [
   {
     id: "Sr3rzZYPHmQ",
-    title: "Live at Valentine's Day Concert, Espoo (17.2.2024)",
+    title: "Live in Espoo",
+    detail: "Valentine's Day Concert, 17.2.2024",
   },
   {
     id: "KVGyMBZLs8s",
-    title: "Hymn of Hope | Kätälyst (Finland) feat. Elias | Mea | Samuli",
+    title: "Hymn of Hope",
+    detail: "feat. Elias, Mea and Samuli",
   },
 ];
-
 
 // TODO: replace with original photos from the band, and describe each photo in its alt text
 export const images = [

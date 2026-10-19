@@ -23,23 +23,33 @@ const Events = () => {
       >
         Tour Dates
       </Typography>
-      <Stack spacing={2}>
-        {events.map((event) => (
-          <Card key={event.id}>
-            <CardActionArea component={Link} to={`/events/${event.id}`}>
-              <CardContent>
-                <Typography variant="h5" component="h2"  sx={{ fontSize: { xs: "1.1rem", md: "1.5rem" } }}>
-                  {event.city}, {event.venue}
-                </Typography>
-                <Typography color="text.secondary">
-                  {formatDate(event.doorsOpenAt)}
-                </Typography>
-                <Typography>{formatPrice(event.priceCents)}</Typography>
-              </CardContent>
-            </CardActionArea>
-          </Card>
-        ))}
-      </Stack>
+      {events.length > 0 ? (
+        <Stack spacing={2}>
+          {events.map((event) => (
+            <Card key={event.id}>
+              <CardActionArea component={Link} to={`/events/${event.id}`}>
+                <CardContent>
+                  <Typography
+                    variant="h5"
+                    component="h2"
+                    sx={{ fontSize: { xs: "1.1rem", md: "1.5rem" } }}
+                  >
+                    {event.city}, {event.venue}
+                  </Typography>
+                  <Typography color="text.secondary">
+                    {formatDate(event.doorsOpenAt)}
+                  </Typography>
+                  <Typography>{formatPrice(event.priceCents)}</Typography>
+                </CardContent>
+              </CardActionArea>
+            </Card>
+          ))}
+        </Stack>
+      ) : (
+        <Typography variant="h2" color="primary.main">
+          There are no upcoming shows at this time
+        </Typography>
+      )}
     </Container>
   );
 };

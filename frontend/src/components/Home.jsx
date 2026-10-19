@@ -5,7 +5,8 @@ import { formatPrice, formatTime, getDateParts } from "../utils/formatter";
 
 const Home = () => {
   const event = useLoaderData();
-  const { day, month, year } = getDateParts(event.doorsOpenAt);
+
+  const dateParts = event ? getDateParts(event.doorsOpenAt) : null;
 
   return (
     <Container>
@@ -79,14 +80,14 @@ const Home = () => {
           </Typography>
         </Box>
       </Stack>
-      <Stack
+      <Box
         sx={{
           m: 10,
           mx: "auto",
 
           bgcolor: "rgba(21, 20, 20, 0.6)",
           backdropFilter: "blur(8px)",
-          border: 0.5,
+          border: 1,
           borderColor: "rgba(102, 51, 55, 0.3)",
           maxWidth: 700,
           borderRadius: 3,
@@ -96,7 +97,7 @@ const Home = () => {
         <Typography
           variant="h4"
           component="h2"
-          sx={{ color: "primary.main", mb: 3 , textAlign:"center"}}
+          sx={{ color: "primary.main", mb: 3, textAlign: "center" }}
         >
           UPCOMING EVENT
         </Typography>
@@ -105,29 +106,36 @@ const Home = () => {
             sx={{
               display: "flex",
               justifyContent: "center",
-              gap: 20,
+              gap: { xs: 5, md: 10 },
               alignItems: "center",
+              flexDirection: { xs: "column", md: "row" },
             }}
           >
-            <Stack>
+            <Stack
+              spacing={1}
+              sx={{
+                alignItems: "center",
+              }}
+            >
               <Typography
-                variant="h3"
-                component="h2"
+                variant="h2"
+                component="span"
                 sx={{ color: "primary.main" }}
+                gutterBottom
               >
-                {day}{" "}
+                {dateParts.day}
               </Typography>
-              <Typography variant="h3" component="h2">
-                {month}
+              <Typography variant="h3" component="span">
+                {dateParts.month}
               </Typography>
-              <Typography variant="h3" component="h2">
-                {year}
+              <Typography variant="h4" component="span">
+                {dateParts.year}
               </Typography>
             </Stack>
 
             <Stack spacing={2}>
               <Typography variant="h5" component="h3">
-                {event.city} , {event.venue}
+                {event.city}, {event.venue}
               </Typography>
               <Typography sx={{ fontSize: "1.2rem" }}>
                 Doors {formatTime(event.doorsOpenAt)}
@@ -149,7 +157,7 @@ const Home = () => {
         ) : (
           <Typography>New dates coming soon!</Typography>
         )}
-      </Stack>
+      </Box>
     </Container>
   );
 };

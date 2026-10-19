@@ -19,18 +19,22 @@ import Events from "./components/Events.jsx";
 import { eventLoader, eventsLoader, homeLoader } from "./utils/loaders.js";
 import Media from "./components/Media.jsx";
 import Band from "./components/Band.jsx";
+import PrivacyPolicy from "./components/PrivacyPolicy.jsx";
+import Terms from "./components/Terms.jsx";
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <App />,
     children: [
-      { index: true, element: <Home /> , loader: homeLoader},
+      { index: true, element: <Home />, loader: homeLoader },
       { path: "events", element: <Events />, loader: eventsLoader },
       { path: "events/:id", element: <EventDetail />, loader: eventLoader },
       { path: "tickets", element: <Tickets /> },
       { path: "media", element: <Media /> },
       { path: "band", element: <Band /> },
+      {path:"privacy-policy", element: <PrivacyPolicy/> },
+      {path:"terms", element:<Terms/>}
     ],
     errorElement: <ErrorPage />,
   },

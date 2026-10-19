@@ -1,6 +1,14 @@
-import { Box, IconButton, Typography } from "@mui/material";
+import {
+  Box,
+  IconButton,
+  Typography,
+  Stack,
+  Divider,
+  Link,
+} from "@mui/material";
 import { Facebook, Instagram, YouTube } from "@mui/icons-material";
 import band, { socials } from "../data/band";
+import { Link as RouterLink } from "react-router";
 
 const ICONS = {
   instagram: Instagram,
@@ -50,7 +58,25 @@ const Footer = () => {
           );
         })}
       </Box>
+      <Stack
+        direction="row"
+        spacing={1}
+        divider={
+          <Divider
+            orientation="vertical"
+            flexItem
+            sx={{ borderRightWidth: 1, borderColor: "text.primary" }}
+          />
+        }
+      >
+        <Link component={RouterLink} to="/privacy-policy" underline="none">
+          Privacy Policy
+        </Link>
 
+        <Link component={RouterLink} to="/terms" underline="none">
+          Terms
+        </Link>
+      </Stack>
       <Typography variant="body2" color="text.secondary">
         © {new Date().getFullYear()} {band.name}
       </Typography>
