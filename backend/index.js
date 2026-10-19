@@ -1,11 +1,13 @@
 const config = require("./utils/config");
 const mongoose = require("mongoose");
 const express = require("express");
+const path = require("path")
 const Event = require("./models/Event");
+const Order = require("./models/Order");
 
 const app = express();
 app.use(express.json());
-app.use(express.static("dist"))
+app.use(express.static("dist"));
 
 mongoose.set("strictQuery", false);
 
@@ -29,6 +31,29 @@ app.get("/api/events/:id", async (req, res) => {
       .json({ message: "The requested event does not exist" });
   }
   res.send(event);
+});
+
+app.post("/api/orders", async (req, res) => {
+  const body = req.body;
+  const event = await Event.findById(body.eventId);
+  if (!event) {
+    return res
+      .status(404)
+      .json({ message: "The requested event does not exist" });
+  }
+  const order = new Order({
+    name: body.name,
+    email: body.email,
+    quantity: body.quantity,
+    event: event.id,
+  });
+
+  const savedOrder = await order.save();
+  res.status(201).json(savedOrder);
+});
+
+app.get("/*splat", (req, res) => {
+  res.sendFile(path.join(__dirname, "dist/index.html"));
 });
 
 app.listen(config.PORT, () => {
