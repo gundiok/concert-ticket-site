@@ -2,12 +2,6 @@ const mongoose = require("mongoose");
 
 const orderSchema = new mongoose.Schema(
   {
-    event: {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "Event",
-      required: true,
-    },
-
     name: { type: String, required: true },
     email: { type: String, required: true },
     quantity: { type: Number, required: true, min: 1 },
@@ -15,6 +9,19 @@ const orderSchema = new mongoose.Schema(
       type: String,
       default: "pending",
       enum: ["pending", "paid", "cancelled"],
+    },
+    event: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Event",
+      required: true,
+    },
+    orderNumber: {
+      type: String,
+      required: true,
+      unique: true,
+      default: () => {
+        return `KAT-${crypto.randomUUID().slice(0, 8).toUpperCase()}`;
+      },
     },
   },
   { timestamps: true },

@@ -33,6 +33,18 @@ app.get("/api/events/:id", async (req, res) => {
   res.send(event);
 });
 
+app.get("/api/orders/:id", async (req, res) => {
+  const id = req.params.id;
+
+  const order = await Order.findById(id).populate("event");
+  if (!order) {
+    return res
+      .status(404)
+      .json({ message: "Your order cannot be found!" });
+  }
+  res.send(order);
+});
+
 app.post("/api/orders", async (req, res) => {
   const body = req.body;
   const event = await Event.findById(body.eventId);

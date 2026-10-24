@@ -29,3 +29,20 @@ Content-Type: application/json
   "name": "No Email",
   "quantity": 1
 }
+
+### Create a test order → copy the "id" from the response
+POST http://localhost:3000/api/orders
+Content-Type: application/json
+
+{
+  "eventId": "6ac7680ebc36899d1167e03e",
+  "name": "Matti Meikäläinen",
+  "email": "matti@example.com",
+  "quantity": 2
+}
+
+### Get that order → expect 200
+GET http://localhost:3000/api/orders/6ad74e8bfcdcf552a81d1b82
+
+### Order that doesn't exist → expect 404 with your message
+GET http://localhost:3000/api/orders/64b7f0000000000000000000
