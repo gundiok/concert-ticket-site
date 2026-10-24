@@ -4,10 +4,10 @@ const fetchJson = async (url) => {
   const response = await fetch(url);
 
   if (!response.ok) {
-    throw data(
-      { message: "This event doesn't exist." },
-      { status: response.status },
-    );
+    const error = await response.json();
+    const errorMessage = error.message ?? "Something went wrong";
+
+    throw data({ message: errorMessage }, { status: response.status });
   }
   return await response.json();
 };
@@ -27,4 +27,9 @@ export const homeLoader = async () => {
     (event) => new Date(event.doorsOpenAt) > new Date(),
   );
   return nextEvent ?? null;
+};
+
+export const orderLoader = ({ params }) => {
+  const id = params.id;
+  return fetchJson(`/api/orders/${id}`);
 };
