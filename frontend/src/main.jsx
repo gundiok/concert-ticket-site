@@ -16,11 +16,13 @@ import "@fontsource/roboto/700.css";
 import "@fontsource/roboto/900.css";
 import Tickets from "./components/Tickets.jsx";
 import Events from "./components/Events.jsx";
-import { eventLoader, eventsLoader, homeLoader } from "./utils/loaders.js";
+import { eventLoader, eventsLoader, homeLoader, orderLoader } from "./utils/loaders.js";
 import Media from "./components/Media.jsx";
 import Band from "./components/Band.jsx";
 import PrivacyPolicy from "./components/PrivacyPolicy.jsx";
 import Terms from "./components/Terms.jsx";
+import { orderAction } from "./utils/actions/orderAction.js";
+import OrderConfirmation from "./components/OrderConfirmation.jsx";
 
 const router = createBrowserRouter([
   {
@@ -29,8 +31,9 @@ const router = createBrowserRouter([
     children: [
       { index: true, element: <Home />, loader: homeLoader },
       { path: "events", element: <Events />, loader: eventsLoader },
-      { path: "events/:id", element: <EventDetail />, loader: eventLoader },
+      { path: "events/:id", element: <EventDetail />, loader: eventLoader, action: orderAction},
       { path: "tickets", element: <Tickets /> },
+      {path:"orders/:id", element: <OrderConfirmation/>, loader: orderLoader},
       { path: "media", element: <Media /> },
       { path: "band", element: <Band /> },
       {path:"privacy-policy", element: <PrivacyPolicy/> },
