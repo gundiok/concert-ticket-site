@@ -8,6 +8,7 @@ const eventSchema = new mongoose.Schema({
   showStartsAt: { type: Date, required: true },
   doorsOpenAt: { type: Date, required: true },
   priceCents: { type: Number, required: true },
+  ticketsAvailable: {type: Number, required: true, min: 0}
 });
 
 eventSchema.set("toJSON", {

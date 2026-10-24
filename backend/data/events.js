@@ -10,6 +10,7 @@ const events = [
     doorsOpenAt: "2026-11-14T19:00:00+02:00",
     showStartsAt: "2026-11-14T20:00:00+02:00",
     priceCents: 2990,
+    ticketsAvailable: 100
   },
   {
     title: "KATALYST Live in Tampere",
@@ -20,6 +21,7 @@ const events = [
     doorsOpenAt: "2026-11-21T19:00:00+02:00",
     showStartsAt: "2026-11-21T20:00:00+02:00",
     priceCents: 2500,
+    ticketsAvailable: 150
   },
   {
     title: "KATALYST Live in Turku",
@@ -30,6 +32,7 @@ const events = [
     doorsOpenAt: "2026-12-05T19:00:00+02:00",
     showStartsAt: "2026-12-05T20:00:00+02:00",
     priceCents: 2750,
+     ticketsAvailable: 80
   },
 ];
 
