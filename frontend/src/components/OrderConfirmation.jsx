@@ -1,5 +1,6 @@
-import { Button, Container, Typography } from "@mui/material";
+import { Button, Container, Stack, Typography } from "@mui/material";
 import { useLoaderData, useRevalidator } from "react-router";
+import { QRCodeSVG } from "qrcode.react";
 
 const OrderConfirmation = () => {
   const order = useLoaderData();
@@ -35,6 +36,17 @@ const OrderConfirmation = () => {
       </Typography>
       {order.status === "pending" && (
         <Button onClick={() => revalidator.revalidate()}>Refresh</Button>
+      )}
+      {order.status === "paid" && (
+        <Stack spacing={2} sx={{ alignItems: "center" }}>
+          <QRCodeSVG
+            value={`${window.location.origin}/checkin/${order.orderNumber}`}
+            title="Ticket QR Code"
+            marginSize={4}
+            size={256}
+          />
+          <Typography>Show this code at the entrance</Typography>
+        </Stack>
       )}
     </Container>
   );
