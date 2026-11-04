@@ -1,10 +1,20 @@
 const mongoose = require("mongoose");
+const validator = require("validator");
 
 const orderSchema = new mongoose.Schema(
   {
-    name: { type: String, required: true },
-    email: { type: String, required: true },
-    quantity: { type: Number, required: true, min: 1 },
+    name: { type: String, required: true, trim: true, maxLength: 100 },
+    email: {
+      type: String,
+      required: [true, "Email address is required"],
+      lowercase: true,
+      trim: true,
+      validate: {
+        validator: validator.isEmail,
+        message: "Please provide a valid email address",
+      },
+    },
+    quantity: { type: Number, required: true, min: 1, max: 10 },
     status: {
       type: String,
       default: "pending",
@@ -23,6 +33,7 @@ const orderSchema = new mongoose.Schema(
         return `KAT-${crypto.randomUUID().slice(0, 8).toUpperCase()}`;
       },
     },
+    totalPriceCents: { type: Number, required: true, min: 1 },
   },
   { timestamps: true },
 );

@@ -1,48 +1,16 @@
-### 1. Valid order → expect 201
+### 4 Helsinki tickets → expect 201 with paymentUrl
 POST http://localhost:3000/api/orders
 Content-Type: application/json
 
 {
-  "eventId": "6ac7680ebc36899d1167e03e",
+  "eventId": "6ad8b20062593ea636ccff9f",
   "name": "Matti Meikäläinen",
   "email": "matti@example.com",
-  "quantity": 2
+  "quantity": 4
 }
 
-### 2. Event doesn't exist → expect 404
-POST http://localhost:3000/api/orders
+### Webhook route alive? → expect 200
+POST http://localhost:3000/api/webhooks/stripe
 Content-Type: application/json
 
-{
-  "eventId": "64b7f0000000000000000000",
-  "name": "Liisa Virtanen",
-  "email": "liisa@example.com",
-  "quantity": 1
-}
-
-### 3. Missing email → expect an error
-POST http://localhost:3000/api/orders
-Content-Type: application/json
-
-{
-  "eventId": "6ac7680ebc36899d1167e03e",
-  "name": "No Email",
-  "quantity": 1
-}
-
-### Create a test order → copy the "id" from the response
-POST http://localhost:3000/api/orders
-Content-Type: application/json
-
-{
-  "eventId": "6ac7680ebc36899d1167e03e",
-  "name": "Matti Meikäläinen",
-  "email": "matti@example.com",
-  "quantity": 2
-}
-
-### Get that order → expect 200
-GET http://localhost:3000/api/orders/6ad74e8bfcdcf552a81d1b82
-
-### Order that doesn't exist → expect 404 with your message
-GET http://localhost:3000/api/orders/64b7f0000000000000000000
+{ "type": "manual.test" }
