@@ -17,7 +17,6 @@ export const orderAction = async ({ request, params }) => {
     throw new Error("Failed to process order");
   }
 
-  const order = await response.json();
-  const orderId = order.id;
-  return redirect(`/orders/${orderId}`);
+  const responseData = await response.json();
+  return redirect(responseData.paymentUrl);
 };

@@ -7,7 +7,7 @@ import IntroOverlay from "./components/IntroOverlay";
 const App = () => {
   return (
     <Container
-      sx={{ display: "flex", flexDirection: "column", minHeight: "100vh" }}
+      sx={{ display: "flex", flexDirection: "column", minHeight: "100dvh" }}
     >
       <IntroOverlay />
       <Nav />

@@ -1,8 +1,9 @@
-import { Container, Typography } from "@mui/material";
-import { useLoaderData } from "react-router";
+import { Button, Container, Typography } from "@mui/material";
+import { useLoaderData, useRevalidator } from "react-router";
 
 const OrderConfirmation = () => {
   const order = useLoaderData();
+  const revalidator = useRevalidator();
 
   return (
     <Container
@@ -19,7 +20,12 @@ const OrderConfirmation = () => {
       }}
     >
       <Typography variant="h4" component="h1">
-        Thank you, {order.name}, your order has been placed!
+        {order.status === "paid" &&
+          `Thank you, ${order.name}, the payment has been successfully processed`}
+        {order.status === "pending" &&
+          `Thank you, ${order.name}, your order is being processed!`}
+        {order.status === "cancelled" &&
+          "Unfortunately, your order has been cancelled!"}
       </Typography>
       <Typography variant="h4" component="h1">
         Your order number: {order.orderNumber}
@@ -27,6 +33,9 @@ const OrderConfirmation = () => {
       <Typography variant="h4" component="h1">
         Event details: {order.event.city}
       </Typography>
+      {order.status === "pending" && (
+        <Button onClick={() => revalidator.revalidate()}>Refresh</Button>
+      )}
     </Container>
   );
 };

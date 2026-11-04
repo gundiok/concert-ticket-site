@@ -47,7 +47,7 @@ const Home = () => {
 
       <Stack
         direction={{ xs: "column", md: "row" }}
-        spacing={10}
+        spacing={{xs: 3, md: 10}}
         sx={{ alignItems: "center" }}
       >
         <Box
@@ -61,7 +61,7 @@ const Home = () => {
             borderRadius: 3,
             display: "block",
           }}
-        ></Box>
+        />
         <Box>
           <Typography variant="h4" component="h2" gutterBottom>
             About the band
@@ -70,11 +70,8 @@ const Home = () => {
             sx={{
               color: "text.secondary",
               maxWidth: "60ch",
-              fontFamily: "Roboto, sans-serif",
               fontSize: "1.2rem",
-              lineHeight: "1.5",
             }}
-            gutterBottom
           >
             {band.bioText}
           </Typography>

@@ -12,10 +12,17 @@ import { Form, Link, useLoaderData } from "react-router";
 import { formatTime, formatPrice } from "../utils/formatter";
 import { useState } from "react";
 
+const nameInputProps = {
+    htmlInput: {
+      maxLength: 100,
+    },
+  };
+
 const EventDetail = () => {
   const event = useLoaderData();
   const [showCheckout, setShowCheckout] = useState(false);
   const [quantity, setQuantity] = useState(1);
+  
 
   return (
     <Box sx={{ maxWidth: 600, mx: "auto", py: 4 }}>
@@ -64,17 +71,22 @@ const EventDetail = () => {
       {showCheckout && (
         <Form method="post">
           <Stack spacing={2} sx={{ maxWidth: 600, my: 4 }}>
-            <TextField label="Name" name="name" type="text" required />
+            <TextField
+              label="Name"
+              name="name"
+              type="text"
+              required
+              slotProps={nameInputProps}
+            />
             <TextField
               label="Email Address"
               name="email"
               type="email"
               required
-              
             />
             <Stack
               direction="row"
-              sx={{ alignItems: "center", justifyContent: "space-between"}}
+              sx={{ alignItems: "center", justifyContent: "space-between" }}
             >
               <input type="hidden" name="quantity" value={quantity} />
 
