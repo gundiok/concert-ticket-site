@@ -142,8 +142,8 @@ app.post("/api/orders", async (req, res) => {
 
   const savedOrder = await order.save();
   const session = await stripeClient.checkout.sessions.create({
-    success_url: `http://localhost:5173/orders/${savedOrder.id}`,
-    cancel_url: `http://localhost:5173/events/${event.id}`,
+    success_url: `${config.FRONTEND_URL}/orders/${savedOrder.id}`,
+    cancel_url: `${config.FRONTEND_URL}/events/${event.id}`,
     line_items: [
       {
         price_data: {
