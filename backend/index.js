@@ -1,4 +1,5 @@
 const config = require("./utils/config");
+const loginRouter = require("./controllers/login");
 const mongoose = require("mongoose");
 const express = require("express");
 const Stripe = require("stripe");
@@ -6,6 +7,7 @@ const path = require("path");
 const Event = require("./models/Event");
 const Order = require("./models/Order");
 const { errorHandler, unknownEndpoint } = require("./utils/middleware");
+const adminRouter = require("./controllers/admin");
 
 const stripeClient = new Stripe(config.STRIPE_KEY);
 
@@ -163,7 +165,8 @@ app.post("/api/orders", async (req, res) => {
     paymentUrl: session.url,
   });
 });
-
+app.use("/api/login", loginRouter);
+app.use("/api/admin", adminRouter);
 app.use("/api", unknownEndpoint);
 app.get("/*splat", (req, res) => {
   res.sendFile(path.join(__dirname, "dist/index.html"));

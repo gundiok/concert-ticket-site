@@ -22,6 +22,8 @@ From 2026-10-24 onwards, hours are logged in real time.
 | 2026-10-27 | 1 | Order validation (quantity rules, name/email schema validation, trim and max lengths in schema and form), server-side order total, ticket capacity with atomic reservation (409 when sold out) |
 | 2026-10-27 | 1 | Error handler and unknown API endpoint middleware, route testing with REST Client, GitHub issue for deferred work |
 | 2026-10-28 | 1 | Redirect buyers to Stripe Checkout after creating order |
-| 2026-10-28 | 2 | Redirect buyers to Stripe Checkout after creating order |
+| 2026-11-03 | 2 | webhook, signature verification, status page |
+| 2026-11-03 | 2 | Admin auth: User model, createAdmin script with bcrypt, JWT login route, requireAuth middleware, JWT error handling, protected admin stats endpoint |
 
-**Total: 41 h**
+
+**Total: 45 h**
