@@ -1,4 +1,4 @@
-import { data } from "react-router";
+import { data, redirect } from "react-router";
 
 const fetchJson = async (url) => {
   const response = await fetch(url);
@@ -32,4 +32,30 @@ export const homeLoader = async () => {
 export const orderLoader = ({ params }) => {
   const id = params.id;
   return fetchJson(`/api/orders/${id}`);
+};
+
+export const adminStatsLoader = async () => {
+  const token = localStorage.getItem("adminToken");
+  if (!token) {
+    return redirect("/admin");
+  }
+  const response = await fetch("/api/admin/stats", {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+
+  if (response.status === 401) {
+    localStorage.removeItem("adminToken");
+    localStorage.removeItem("adminUser");
+    return redirect("/admin");
+  }
+
+  if (!response.ok) {
+    throw data(
+      { message: "Something went wrong" },
+      { status: response.status },
+    );
+  }
+  return response.json();
 };
